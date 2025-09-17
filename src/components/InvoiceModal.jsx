@@ -253,7 +253,7 @@ const InvoiceModal = ({
                   <div className='w-2/5 border-l border-black/50 grid grid-row-2 pt-2'>
                     <span className="text-xs pl-0">
                       <img 
-                        src="./signature.png"   // replace with your actual logo path
+                        src={`${process.env.PUBLIC_URL}/signature.png`}   // replace with your actual logo path
                         alt="Sameer" 
                         className="mx-auto w-18 h-9 m-2" // adjust size as needed
                       />
