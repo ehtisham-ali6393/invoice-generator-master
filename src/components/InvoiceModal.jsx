@@ -3,6 +3,30 @@ import { Dialog, Transition } from '@headlessui/react';
 import { toPng } from 'html-to-image';
 import { jsPDF } from 'jspdf';
 
+function numberToWords(num) {
+  const a = [
+    "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine",
+    "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", 
+    "Sixteen", "Seventeen", "Eighteen", "Nineteen"
+  ];
+  const b = [
+    "", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", 
+    "Eighty", "Ninety"
+  ];
+
+  function inWords(n) {
+    if (n < 20) return a[n];
+    if (n < 100) return b[Math.floor(n / 10)] + (n % 10 ? " " + a[n % 10] : "");
+    if (n < 1000) return a[Math.floor(n / 100)] + " Hundred" + (n % 100 ? " " + inWords(n % 100) : "");
+    if (n < 100000) return inWords(Math.floor(n / 1000)) + " Thousand" + (n % 1000 ? " " + inWords(n % 1000) : "");
+    if (n < 10000000) return inWords(Math.floor(n / 100000)) + " Lakh" + (n % 100000 ? " " + inWords(n % 100000) : "");
+    return inWords(Math.floor(n / 10000000)) + " Crore" + (n % 10000000 ? " " + inWords(n % 10000000) : "");
+  }
+
+  return inWords(num);
+}
+
+
 const InvoiceModal = ({
   isOpen,
   setIsOpen,
@@ -119,70 +143,127 @@ const InvoiceModal = ({
           >
             <div className="my-8 inline-block w-full max-w-md transform overflow-hidden rounded-lg bg-white text-left align-middle shadow-xl transition-all">
               <div className="p-4" id="print">
-                <h1 className="text-center text-lg font-bold text-gray-900">
-                  INVOICE
-                </h1>
-                <div className="mt-6">
-                  <div className="mb-4 grid grid-cols-2">
-                    <span className="font-bold">Invoice Number:</span>
+                <div className="text-center">
+                  <img 
+                    src="/logo.png"   // replace with your actual logo path
+                    alt="A R Creation" 
+                    className="mx-auto w-30 h-14 m-2" // adjust size as needed
+                  />
+                </div>
+                <div className="p-1 pl-2 pr-2 border border-black/50 border-b-0 text-xs  flex justify-between">
+                  <div>
+                    <span className="font-bold">Invoice Number : </span>
                     <span>{invoiceInfo.invoiceNumber}</span>
-                    <span className="font-bold">Cashier:</span>
-                    <span>{invoiceInfo.cashierName}</span>
-                    <span className="font-bold">Customer:</span>
-                    <span>{invoiceInfo.customerName}</span>
+                  </div>
+                  <div>
+                    <span className="font-bold">GSTIN : </span>
+                    <span>{invoiceInfo.ownerGstNumber}</span>
+                  </div> 
+                </div>
+                
+                
+                  <div className="p-2 grid grid-row-2 text-center border border-black/50 border-b-0">
+                    <span className="text-xs">RZ - 412A, Gali no. 13, Tughlakabad Extension, New Delhi. 110019</span>
+                    <span className="text-xs">Email : ownerarcreation@gmail.com </span>
+                    <span className="text-xs"> Mobile : 9643251284, 9667038099</span>
                   </div>
 
+                  <div className=" p-2 grid grid-cols-2 border border-black/50 border-b-0 text-xs">
+                    <span className="font-bold">Party's Name :</span>
+                    <span>{invoiceInfo.customerName}</span>
+                    <span className="font-bold">Billing Address :</span>
+                    <span className="text-xs">{invoiceInfo.customerBillingAddress}</span>
+                    <span className="font-bold">Party's GSTIN :</span>
+                    <span className="font-bold">{invoiceInfo.customerGstNumber}</span>
+                  </div>
+
+                  <div className='pl-2 pr-2 border border-black/50 border-b-0'>
                   <table className="w-full text-left">
                     <thead>
-                      <tr className="border-y border-black/10 text-sm md:text-base">
-                        <th>ITEM</th>
+                      <tr className="border-b border-black/50 text-xs">
+                        <th >ITEM</th>
+                        <th className="text-center">HSN</th>
                         <th className="text-center">QTY</th>
-                        <th className="text-right">PRICE</th>
-                        <th className="text-right">AMOUNT</th>
+                        <th className="text-centre">RATE</th>
+                        <th className="text-centre pr-4">AMOUNT</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody className='pl-2 pr-2 text-xs'>
                       {items.map((item) => (
                         <tr key={item.id}>
                           <td className="w-full">{item.name}</td>
+                          <td className='w-full'>9988</td>
                           <td className="min-w-[50px] text-center">
                             {item.qty}
                           </td>
-                          <td className="min-w-[80px] text-right">
-                            ₹ {Number(item.price).toFixed(2)}
+                          <td className="min-w-[70px] pr-0 pl-0 text-centre">
+                           ₹ {Number(item.price).toFixed(2)}
                           </td>
-                          <td className="min-w-[90px] text-right">
-                            ₹ {Number(item.price * item.qty).toFixed(2)}
+                          <td className="min-w-[80px] text-centre">
+                           ₹ {Number(item.price * item.qty).toFixed(2)}
                           </td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
+                  </div>
 
-                  <div className="mt-4 flex flex-col items-end space-y-2">
-                    <div className="flex w-full justify-between border-t border-black/10 pt-2">
-                      <span className="font-bold">Subtotal:</span>
-                      <span>₹ {invoiceInfo.subtotal.toFixed(2)}</span>
+                <div className="flex flex-row space-y-2 border border-black/50 pl-2 pr-2 pb-2 text-xs ">
+                  <div className='w-1/2'>
+                    <div className="flex w-full pt-2">
+                      <span className="font-bold">Subtotal :</span>
+                      <span className='ml-2'>₹ {invoiceInfo.subtotal.toFixed(2)}</span>
                     </div>
-                    <div className="flex w-full justify-between">
-                      <span className="font-bold">Discount:</span>
-                      <span>₹ {invoiceInfo.discountRate.toFixed(2)}</span>
+                    <div className="flex w-full ">
+                      <span className="font-bold">CGST :</span>
+                      <span className='ml-2'>₹ {invoiceInfo.cgstRate.toFixed(2)}</span>
                     </div>
-                    <div className="flex w-full justify-between">
-                      <span className="font-bold">Tax:</span>
-                      <span>₹ {invoiceInfo.taxRate.toFixed(2)}</span>
+                    <div className="flex w-full ">
+                      <span className="font-bold">SGST :</span>
+                      <span className='ml-2'>₹ {invoiceInfo.sgstRate.toFixed(2)}</span>
                     </div>
-                    <div className="flex w-full justify-between border-t border-black/10 py-2">
-                      <span className="font-bold">Total:</span>
-                      <span className="font-bold">
-                        
+                    <div className="flex w-full">
+                      <span className="font-bold">IGST :</span>
+                      <span className='ml-2'>₹ {invoiceInfo.igstRate.toFixed(2)}</span>
+                    </div>
+                  </div>  
+                  <div className="w-1/2 pl-2 border-l border-black/50 ">
+                    <div>
+                      <span className="font-bold">Total :</span>
+                      <span className="font-bold ml-2">   
                       ₹ {invoiceInfo.total % 1 === 0
                           ? invoiceInfo.total
                           : invoiceInfo.total.toFixed(2)}
                       </span>
                     </div>
+                    <div >
+                        <span className="font-bold ">In words :</span>
+                        <span className=" ml-2 text-xs text-right break-words max-w-[60%]">{numberToWords(Math.floor(invoiceInfo.total))}</span>
+                    </div>
+                  </div>  
+                </div>
+
+                <div className=" flex flex-row border border-black/50 border-t-0 ">
+                  <div className='w-3/5 grid grid-row-2 text-left font-bold p-2'>
+                    <span className="text-xs">Bank Details :</span>
+                    <span className="text-xs"> Bandhan Bank </span>
+                    <span className="text-xs">  A/C No. : 10170000343326</span>
+                    <span className="text-xs">  IFSC CODE : BDBL0001215</span>
+                  </div>
+                  <div className='w-2/5 border-l border-black/50 grid grid-row-2 pt-2'>
+                    <span className="text-xs pl-0">
+                      <img 
+                        src="/signature.png"   // replace with your actual logo path
+                        alt="Sameer" 
+                        className="mx-auto w-18 h-9 m-2" // adjust size as needed
+                      />
+                    </span>
+                    <span className="text-xs pl-2 pb-2"> Authorised Signature </span>
+
                   </div>
                 </div>
+
+                
               </div>
               <div className="mt-4 flex space-x-2 px-4 pb-6">
                 <button

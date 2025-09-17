@@ -12,11 +12,14 @@ const today = date.toLocaleDateString('en-GB', {
 
 const InvoiceForm = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [discount, setDiscount] = useState('');
-  const [tax, setTax] = useState('');
+  const [cgst, setCgst] = useState('2.5');
+  const [sgst, setSgst] = useState('2.5');
+  const [igst, setIgst] = useState('');
   const [invoiceNumber, setInvoiceNumber] = useState(1);
-  const [cashierName, setCashierName] = useState('');
+  const [ownerGstNumber, setOwnerGstNumber] = useState('07AHJPA8136D1ZN');
+  const [customerGstNumber, setCustomerGstNumber] = useState('');
   const [customerName, setCustomerName] = useState('');
+  const [customerBillingAddress, setCustomerBillingAddress] = useState('');
   const [items, setItems] = useState([
     {
       id: uid(6),
@@ -84,9 +87,10 @@ const InvoiceForm = () => {
       return prev + Number(curr.price * Math.floor(curr.qty));
     else return prev;
   }, 0);
-  const taxRate = (tax * subtotal) / 100;
-  const discountRate = (discount * subtotal) / 100;
-  const total = subtotal - discountRate + taxRate;
+  const cgstRate = (cgst * subtotal) / 100;
+  const sgstRate = (sgst * subtotal) / 100;
+  const igstRate = (igst * subtotal) / 100;
+  const total = subtotal + cgstRate + sgstRate + igstRate;
 
   return (
     <form
@@ -116,29 +120,20 @@ const InvoiceForm = () => {
             />
           </div>
         </div>
-        <h1 className="text-center text-lg font-bold">INVOICE</h1>
-        <div className="grid grid-cols-2 gap-2 pt-4 pb-8">
-          <label
-            htmlFor="cashierName"
-            className="text-sm font-bold sm:text-base"
-          >
-            Cashier:
-          </label>
-          <input
-            required
-            className="flex-1"
-            placeholder="Cashier name"
-            type="text"
-            name="cashierName"
-            id="cashierName"
-            value={cashierName}
-            onChange={(event) => setCashierName(event.target.value)}
+        <div className="text-center">
+          <img 
+              src="/logo.png"   // replace with your actual logo path
+              alt="A R Creation" 
+              className="mx-auto w-34 h-20" // adjust size as needed
           />
+        </div>
+
+        <div className="grid grid-cols-3 gap-3 pt-4 pb-8">
           <label
             htmlFor="customerName"
-            className="col-start-2 row-start-1 text-sm font-bold md:text-base"
+            className="text-sm font-bold sm:text-base"
           >
-            Customer:
+            Party Name :
           </label>
           <input
             required
@@ -150,13 +145,47 @@ const InvoiceForm = () => {
             value={customerName}
             onChange={(event) => setCustomerName(event.target.value)}
           />
+          <label
+            htmlFor="customerGstNumber"
+            className="col-start-2 row-start-1 text-sm font-bold md:text-base"
+          >
+            Party's GSTIN:
+          </label>
+          <input
+            required
+            className="flex-1"
+            placeholder="Customer GSTIN"
+            type="text"
+            name="customerGstNumber"
+            id="customerGstNumber"
+            value={customerGstNumber}
+            onChange={(event) => setCustomerGstNumber(event.target.value)}
+          />
+          <label
+            htmlFor="customerBillingAddress"
+            className="col-start-3 row-start-1 text-sm font-bold md:text-base"
+          >
+            Billing Address:
+          </label>
+          <input
+            required
+            className="flex-1"
+            placeholder="Customer Billing Address"
+            type="text"
+            name="customerBillingAddress"
+            id="customerBillingAddress"
+            value={customerBillingAddress}
+            onChange={(event) => setCustomerBillingAddress(event.target.value)}
+          />
+
         </div>
         <table className="w-full p-4 text-left">
           <thead>
             <tr className="border-b border-gray-900/10 text-sm md:text-base">
-              <th>ITEM</th>
-              <th>QTY</th>
-              <th className="text-center">PRICE</th>
+              <th>Description</th>
+              <th className="text-center">HSN</th>
+              <th className="text-center">QTY</th>
+              <th className="text-center">RATE</th>
               <th className="text-center">ACTION</th>
             </tr>
           </thead>
@@ -166,6 +195,7 @@ const InvoiceForm = () => {
                 key={item.id}
                 id={item.id}
                 name={item.name}
+                hsn={item.hsn}
                 qty={item.qty}
                 price={item.price}
                 onDeleteItem={deleteItemHandler}
@@ -187,17 +217,24 @@ const InvoiceForm = () => {
             <span> ₹ {subtotal.toFixed(2)}</span>
           </div>
           <div className="flex w-full justify-between md:w-1/2">
-            <span className="font-bold">Discount:</span>
+            <span className="font-bold">CGST:</span>
             <span>
-              ({discount || '0'}%) ₹ {discountRate.toFixed(2)}
+              ({cgst || '0'}%) ₹ {cgstRate.toFixed(2)}
             </span>
           </div>
           <div className="flex w-full justify-between md:w-1/2">
-            <span className="font-bold">Tax:</span>
+            <span className="font-bold">SGST:</span>
             <span>
-              ({tax || '0'}%) ₹ {taxRate.toFixed(2)}
+              ({sgst || '0'}%) ₹ {sgstRate.toFixed(2)}
             </span>
           </div>
+          <div className="flex w-full justify-between md:w-1/2">
+            <span className="font-bold">IGST:</span>
+            <span>
+              ({igst || '0'}%) ₹ {igstRate.toFixed(2)}
+            </span>
+          </div>
+
           <div className="flex w-full justify-between border-t border-gray-900/10 pt-2 md:w-1/2">
             <span className="font-bold">Total:</span>
             <span className="font-bold">
@@ -219,11 +256,14 @@ const InvoiceForm = () => {
             setIsOpen={setIsOpen}
             invoiceInfo={{
               invoiceNumber,
-              cashierName,
+              customerGstNumber,
               customerName,
+              customerBillingAddress,
+              ownerGstNumber,
               subtotal,
-              taxRate,
-              discountRate,
+              sgstRate,
+              cgstRate,
+              igstRate,
               total,
             }}
             items={items}
@@ -231,20 +271,22 @@ const InvoiceForm = () => {
           />
           <div className="space-y-4 py-2">
             <div className="space-y-2">
-              <label className="text-sm font-bold md:text-base" htmlFor="tax">
-                Tax rate:
+              <label className="text-sm font-bold md:text-base" 
+              htmlFor="cgst"
+              >
+                CGST:
               </label>
               <div className="flex items-center">
                 <input
                   className="w-full rounded-r-none bg-white shadow-sm"
                   type="number"
-                  name="tax"
-                  id="tax"
+                  name="cgst"
+                  id="cgst"
                   min="0.01"
                   step="0.01"
                   placeholder="0.0"
-                  value={tax}
-                  onChange={(event) => setTax(event.target.value)}
+                  value={cgst}
+                  onChange={(event) => setCgst(event.target.value)}
                 />
                 <span className="rounded-r-md bg-gray-200 py-2 px-4 text-gray-500 shadow-sm">
                   %
@@ -254,27 +296,51 @@ const InvoiceForm = () => {
             <div className="space-y-2">
               <label
                 className="text-sm font-bold md:text-base"
-                htmlFor="discount"
+                htmlFor="sgst"
               >
-                Discount rate:
+                SGST:
               </label>
               <div className="flex items-center">
                 <input
                   className="w-full rounded-r-none bg-white shadow-sm"
                   type="number"
-                  name="discount"
-                  id="discount"
+                  name="sgst"
+                  id="sgst"
                   min="0"
                   step="0.01"
                   placeholder="0.0"
-                  value={discount}
-                  onChange={(event) => setDiscount(event.target.value)}
+                  value={sgst}
+                  onChange={(event) => setSgst(event.target.value)}
                 />
                 <span className="rounded-r-md bg-gray-200 py-2 px-4 text-gray-500 shadow-sm">
                   %
                 </span>
               </div>
             </div>
+            <div className="space-y-2">
+              <label
+                className="text-sm font-bold md:text-base"
+                htmlFor="igst"
+              >
+                IGST:
+              </label>
+              <div className="flex items-center">
+                <input
+                  className="w-full rounded-r-none bg-white shadow-sm"
+                  type="number"
+                  name="igst"
+                  id="igst"
+                  min="0"
+                  step="0.01"
+                  placeholder="0.0"
+                  value={igst}
+                  onChange={(event) => setIgst(event.target.value)}
+                />
+                <span className="rounded-r-md bg-gray-200 py-2 px-4 text-gray-500 shadow-sm">
+                  %
+                </span>
+              </div>
+            </div>            
           </div>
         </div>
       </div>

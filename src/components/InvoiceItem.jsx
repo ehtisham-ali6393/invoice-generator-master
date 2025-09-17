@@ -12,7 +12,7 @@ const InvoiceItem = ({ id, name, qty, price, onDeleteItem, onEdtiItem }) => {
         <InvoiceField
           onEditItem={(event) => onEdtiItem(event)}
           cellData={{
-            placeholder: 'Item name',
+            placeholder: 'Description',
             type: 'text',
             name: 'name',
             id: id,
@@ -20,6 +20,19 @@ const InvoiceItem = ({ id, name, qty, price, onDeleteItem, onEdtiItem }) => {
           }}
         />
       </td>
+    <td className="min-w-[65px] md:min-w-[80px]">
+        <InvoiceField
+          onEditItem={(event) => onEdtiItem(event)}
+          cellData={{
+            placeholder: 'Item name',
+            type: 'text',
+            name: 'hsn',
+            id: id,
+            value: '9988',
+          }}
+        />
+      </td>
+
       <td className="min-w-[65px] md:min-w-[80px]">
         <InvoiceField
           onEditItem={(event) => onEdtiItem(event)}
