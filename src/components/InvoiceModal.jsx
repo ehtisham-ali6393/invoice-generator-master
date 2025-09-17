@@ -145,7 +145,7 @@ const InvoiceModal = ({
               <div className="p-4" id="print">
                 <div className="text-center">
                   <img 
-                    src="./logo.png"   // replace with your actual logo path
+                    src={`${process.env.PUBLIC_URL}/logo.png`}   // replace with your actual logo path
                     alt="A R Creation" 
                     className="mx-auto w-30 h-14 m-2" // adjust size as needed
                   />
