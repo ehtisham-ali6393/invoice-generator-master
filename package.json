@@ -2,6 +2,7 @@
   "name": "invoice-generator",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://ehtisham-ali6393.github.io/invoice-generator-master",
   "dependencies": {
     "@headlessui/react": "^1.5.0",
     "@testing-library/jest-dom": "^5.16.2",
@@ -19,7 +20,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -42,6 +45,7 @@
   "devDependencies": {
     "@tailwindcss/forms": "^0.4.0",
     "autoprefixer": "^10.4.2",
+    "gh-pages": "^6.3.0",
     "postcss": "^8.4.7",
     "prettier": "^2.5.1",
     "prettier-plugin-tailwindcss": "^0.1.8",
