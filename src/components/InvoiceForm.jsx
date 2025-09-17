@@ -122,7 +122,7 @@ const InvoiceForm = () => {
         </div>
         <div className="text-center">
           <img 
-              src="./logo.png"   // replace with your actual logo path
+              src={`${process.env.PUBLIC_URL}/logo.png`}   // replace with your actual logo path
               alt="A R Creation" 
               className="mx-auto w-34 h-20" // adjust size as needed
           />
