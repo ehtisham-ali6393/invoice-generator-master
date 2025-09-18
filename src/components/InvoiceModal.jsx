@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { toPng } from 'html-to-image';
-import { jsPDF } from 'jspdf';
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 function numberToWords(num) {
   const a = [
@@ -43,9 +44,9 @@ const InvoiceModal = ({
     onAddNextInvoice();
   };
 
-  const SaveAsPDFHandler = () => {
+const SaveAsPDFHandler = () => {
     const dom = document.getElementById('print');
-    toPng(dom)
+    toPng(dom, { quality: 1.0, pixelRatio: 4 }) // Adjust pixelRatio for higher resolution
       .then((dataUrl) => {
         const img = new Image();
         img.crossOrigin = 'annoymous';
@@ -97,7 +98,7 @@ const InvoiceModal = ({
             pdf.addImage(imgData, imageType, 0, 0, pdfWidth, pageHeight);
           }
           // Output / Save
-          pdf.save(`invoice-${invoiceInfo.invoiceNumber}.pdf`);
+          pdf.save(`Invoice ${invoiceInfo.customerName} ${invoiceInfo.today}.pdf`);
         };
       })
       .catch((error) => {
@@ -143,44 +144,48 @@ const InvoiceModal = ({
           >
             <div className="my-8 inline-block w-full max-w-md transform overflow-hidden rounded-lg bg-white text-left align-middle shadow-xl transition-all">
               <div className="p-4" id="print">
-                <div className="text-center">
+                
+                <div className="text-center border border-black/50 border-b-0">
                   <img 
                     src={`${process.env.PUBLIC_URL}/logo.png`}   // replace with your actual logo path
                     alt="A R Creation" 
-                    className="mx-auto w-30 h-14 m-2" // adjust size as needed
+                    className="mx-auto w-30 h-16 pt-3 " // adjust size as needed
                   />
+                  </div>
+                <div className="p-2 pt-0 grid grid-row-2 text-center border border-black/50 border-t-0 border-b-0">
+                    <span className="text-[10px]">RZ - 412A, Gali no. 13, Tughlakabad Extension, New Delhi. 110019</span>
+                    <span className="text-[10px]">Email : ownerarcreation@gmail.com </span>
+                    <span className="text-[10px]"> Mobile : 9643251284, 9667038099</span>
+                  <div className='text-[10px]'>
+                    <span className="font-bold">GSTIN : </span>
+                    <span className="font-bold">{invoiceInfo.ownerGstNumber}</span>
+                  </div> 
                 </div>
-                <div className="p-1 pl-2 pr-2 border border-black/50 border-b-0 text-xs  flex justify-between">
+
+                
+                <div className="p-1 pl-2 pr-2 border border-black/50 border-b-0 text-[10px]  flex justify-between">
                   <div>
-                    <span className="font-bold">Invoice Number : </span>
+                    <span className="font-bold">Invoice No. : </span>
                     <span>{invoiceInfo.invoiceNumber}</span>
                   </div>
                   <div>
-                    <span className="font-bold">GSTIN : </span>
-                    <span>{invoiceInfo.ownerGstNumber}</span>
-                  </div> 
-                </div>
-                
-                
-                  <div className="p-2 grid grid-row-2 text-center border border-black/50 border-b-0">
-                    <span className="text-xs">RZ - 412A, Gali no. 13, Tughlakabad Extension, New Delhi. 110019</span>
-                    <span className="text-xs">Email : ownerarcreation@gmail.com </span>
-                    <span className="text-xs"> Mobile : 9643251284, 9667038099</span>
+                    <span className="font-bold">Date : </span>
+                    <span>{invoiceInfo.today}</span>
                   </div>
-
-                  <div className=" p-2 grid grid-cols-2 border border-black/50 border-b-0 text-xs">
+                </div>
+                  <div className=" p-2 grid grid-cols-2 border border-black/50 border-b-0 text-[10px]">
                     <span className="font-bold">Party's Name :</span>
                     <span>{invoiceInfo.customerName}</span>
                     <span className="font-bold">Billing Address :</span>
-                    <span className="text-xs">{invoiceInfo.customerBillingAddress}</span>
+                    <span >{invoiceInfo.customerBillingAddress}</span>
                     <span className="font-bold">Party's GSTIN :</span>
                     <span className="font-bold">{invoiceInfo.customerGstNumber}</span>
                   </div>
 
-                  <div className='pl-2 pr-2 border border-black/50 border-b-0'>
+                  <div className='pl-2 pr-2 pb-1 border border-black/50 border-b-0'>
                   <table className="w-full text-left">
                     <thead>
-                      <tr className="border-b border-black/50 text-xs">
+                      <tr className="border-b border-black/50 text-[10px]">
                         <th >ITEM</th>
                         <th className="text-center">HSN</th>
                         <th className="text-center">QTY</th>
@@ -188,18 +193,16 @@ const InvoiceModal = ({
                         <th className="text-centre pr-4">AMOUNT</th>
                       </tr>
                     </thead>
-                    <tbody className='pl-2 pr-2 text-xs'>
+                    <tbody className='pl-2 pr-2 text-[10px]'>
                       {items.map((item) => (
                         <tr key={item.id}>
-                          <td className="w-full">{item.name}</td>
-                          <td className='w-full'>9988</td>
-                          <td className="min-w-[50px] text-center">
-                            {item.qty}
-                          </td>
-                          <td className="min-w-[70px] pr-0 pl-0 text-centre">
+                          <td className="w-full py-0">{item.name}</td>
+                          <td className='w-full py-0 '>9988</td>
+                          <td className="min-w-[50px] text-center py-0">{item.qty}</td>
+                          <td className="min-w-[70px] pr-0 pl-0 text-centre py-0">
                            ₹ {Number(item.price).toFixed(2)}
                           </td>
-                          <td className="min-w-[80px] text-centre">
+                          <td className="min-w-[80px] text-centre py-0">
                            ₹ {Number(item.price * item.qty).toFixed(2)}
                           </td>
                         </tr>
@@ -208,7 +211,7 @@ const InvoiceModal = ({
                   </table>
                   </div>
 
-                <div className="flex flex-row space-y-2 border border-black/50 pl-2 pr-2 pb-2 text-xs ">
+                <div className="flex flex-row space-y-2 border border-black/50 pl-2 pr-2 pb-2 text-[10px] ">
                   <div className='w-1/2'>
                     <div className="flex w-full pt-2">
                       <span className="font-bold">Subtotal :</span>
@@ -238,29 +241,38 @@ const InvoiceModal = ({
                     </div>
                     <div >
                         <span className="font-bold ">In words :</span>
-                        <span className=" ml-2 text-xs text-right break-words max-w-[60%]">{numberToWords(Math.floor(invoiceInfo.total))}</span>
+                        <span className=" ml-2 text-[10px] text-right break-words max-w-[60%]">{numberToWords(Math.floor(invoiceInfo.total))}</span>
                     </div>
                   </div>  
                 </div>
 
-                <div className=" flex flex-row border border-black/50 border-t-0 ">
-                  <div className='w-3/5 grid grid-row-2 text-left font-bold p-2'>
-                    <span className="text-xs">Bank Details :</span>
-                    <span className="text-xs"> Bandhan Bank </span>
-                    <span className="text-xs">  A/C No. : 10170000343326</span>
-                    <span className="text-xs">  IFSC CODE : BDBL0001215</span>
+                <div className="flex flex-row border border-black/50 border-t-0 text-center">
+                  <div className='w-3/5 grid grid-row-2 font-bold p-2'>
+                    <span className="text-[10px]">Bank Details :</span>
+                    <span className="text-[10px]">Bandhan Bank </span>
+                    <span className="text-[10px]">A/C No. : 10170000343326</span>
+                    <span className="text-[10px]">IFSC CODE : BDBL0001215</span>
                   </div>
                   <div className='w-2/5 border-l border-black/50 grid grid-row-2 pt-2'>
-                    <span className="text-xs pl-0">
-                      <img 
-                        src={`${process.env.PUBLIC_URL}/signature.png`}   // replace with your actual logo path
-                        alt="Sameer" 
-                        className="mx-auto w-18 h-9 m-2" // adjust size as needed
+                    <span className="pl-0 flex justify-center">
+                      <img
+                        src={`${process.env.PUBLIC_URL}/signature.png`}
+                        alt="Sameer"
+                        className="mx-auto w-18 h-9 m-2"
                       />
                     </span>
-                    <span className="text-xs pl-2 pb-2"> Authorised Signature </span>
-
+                    <span className="text-[10px] pb-2 text-center">Authorised Signature</span>
                   </div>
+                </div>
+
+                <div className="p-1 pl-2 pr-2 border border-black/50 border-t-0 text-[10px]">
+                    <span className="font-bold">Special Note : </span>
+                    <span>{invoiceInfo.splNote}</span>
+                </div>
+
+                <div className="p-1 pl-2 pr-2 border border-black/50 border-t-0 text-[10px]">
+                    <span className="font-bold">Terms & Conditions : </span>
+                    <span className="text-[10px]"> All disputes are Subject to Delhi Jurisdiction. Goods once sold will not be taken back. Interest will be charged @ 18%, if bill not paid within 15 days. Our responsibility ceases on Delivery of the carrier.</span>
                 </div>
 
                 

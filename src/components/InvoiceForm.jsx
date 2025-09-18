@@ -19,6 +19,7 @@ const InvoiceForm = () => {
   const [ownerGstNumber, setOwnerGstNumber] = useState('07AHJPA8136D1ZN');
   const [customerGstNumber, setCustomerGstNumber] = useState('');
   const [customerName, setCustomerName] = useState('');
+  const [splNote, setSplNote] = useState(''); // Special Note
   const [customerBillingAddress, setCustomerBillingAddress] = useState('');
   const [items, setItems] = useState([
     {
@@ -211,7 +212,26 @@ const InvoiceForm = () => {
         >
           Add Item
         </button>
-        <div className="flex flex-col items-end space-y-2 pt-6">
+        <div className="flex flex-row ">
+          <div className='w-2/6 flex flex-col  gap-2 px-1 py-2'>
+          <label
+            htmlFor="splNote"
+            className="text-sm font-bold sm:text-base "
+          >
+            Special Note :
+          </label>
+          <input
+            className="flex-1 border rounded px-4 py-4 text-center"
+            placeholder="Enter Note"
+            type="text"
+            name="splNote"
+            id="splNote"
+            value={splNote}
+            onChange={(event) => setSplNote(event.target.value)}
+          />
+
+          </div>
+          <div className='w-4/6 flex flex-col items-end space-y-2 pt-2 pr-2'>
           <div className="flex w-full justify-between md:w-1/2">
             <span className="font-bold">Subtotal:</span>
             <span> ₹ {subtotal.toFixed(2)}</span>
@@ -243,6 +263,7 @@ const InvoiceForm = () => {
           </div>
         </div>
       </div>
+      </div>
       <div className="basis-1/4 bg-transparent">
         <div className="sticky top-0 z-10 space-y-4 divide-y divide-gray-900/10 pb-8 md:pt-6 md:pl-4">
           <button
@@ -255,6 +276,7 @@ const InvoiceForm = () => {
             isOpen={isOpen}
             setIsOpen={setIsOpen}
             invoiceInfo={{
+              today,
               invoiceNumber,
               customerGstNumber,
               customerName,
@@ -264,6 +286,7 @@ const InvoiceForm = () => {
               sgstRate,
               cgstRate,
               igstRate,
+              splNote,
               total,
             }}
             items={items}
