@@ -172,8 +172,12 @@ const InvoiceModal = ({
                         {/* Empty rows to keep height fixed */}
                         {Array.from({ length: Math.max(0, 8 - pageItems.length) }).map((_, i) => (
                           <tr key={`empty-${i}`} >
-                            <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
-                            <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
                           </tr>
                         ))}
                       </tbody>
@@ -234,7 +238,7 @@ const InvoiceModal = ({
                               className="mx-auto w-18 h-10 m-2"
                             />
                           </span>
-                          <span className="text-[10px] pb-2 text-center">Authorised Signature</span>
+                          <span className="text-[9px] pb-2 text-center">Authorised Signature</span>
                         </div>
                       </div>
 
