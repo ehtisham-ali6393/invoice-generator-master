@@ -182,8 +182,8 @@ const InvoiceModal = ({
 
                   {/* ---------- Totals Section (only on last page) ---------- */}
                   {pageIndex === chunkedItems.length - 1 && (
-                    <div className="flex flex-row border border-black/50 pl-2 pr-2 pb-2 text-[10px]">
-                      <div className="w-1/2">
+                    <div className="flex flex-row border border-black/50 pl-2 pr-2 pb-2 text-[10px] ">
+                      <div className="w-1/2 ">
                         <div className="flex w-full pt-2">
                           <span className="font-bold">Subtotal :</span>
                           <span className="ml-2">₹ {invoiceInfo.subtotal.toFixed(2)}</span>
