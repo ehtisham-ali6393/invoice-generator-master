@@ -32,12 +32,12 @@ const InvoiceForm = () => {
     {
       name: 'Kashmir Loom',
       gst: '07AABCK4463H1ZK',
-      address: ' C - 65 Besment, Nizamuddin East, New Delhi - 110013',
+      address: 'C - 65 Besment, Nizamuddin East, New Delhi - 110013',
     },
     {
       name: 'New Pinch',
       gst: '07AALPK9019N1Z4',
-      address: ' C - 124, Dayanand Colony, Lajpat Nagar-IV, New Delhi - 110024',
+      address: 'C - 124, Dayanand Colony, Lajpat Nagar-IV, New Delhi - 110024',
     },
     {
       name: 'FIL Industies Private Limited',
@@ -50,7 +50,7 @@ const InvoiceForm = () => {
       address: ' S-78 / First Floor, Okhla Industrial Area Phase - 2,  New Delhi - 110020',
     },
     {
-      name: ' Saltpetre Products & Services Pvt Ltd (OPC)',
+      name: 'Saltpetre Products & Services Pvt Ltd (OPC)',
       gst: '29AAWCS4503M1ZL',
       address: '524, 16th main, 3rd Block Koramangala, Bangalore - 560034',
     },
