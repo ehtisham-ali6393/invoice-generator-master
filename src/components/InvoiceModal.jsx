@@ -42,10 +42,10 @@ const InvoiceModal = ({
     onAddNextInvoice();
   };
 
-  // Split items into pages of 10
+  // Split items into pages of 8
   const chunkedItems = [];
-  for (let i = 0; i < items.length; i += 10) {
-    chunkedItems.push(items.slice(i, i + 10));
+  for (let i = 0; i < items.length; i += 8) {
+    chunkedItems.push(items.slice(i, i + 8));
   }
 
   const SaveAsPDFHandler = async () => {
@@ -161,7 +161,7 @@ const InvoiceModal = ({
                       <tbody className="text-[10px]">
                         {pageItems.map((item, index) => (
                           <tr key={item.id} >
-                            <td className="text-center">{pageIndex * 10 + index + 1}</td>
+                            <td className="text-left pl-2">{pageIndex * 8 + index + 1}</td>
                             <td>{item.name}</td>
                             <td className="text-center">9988</td>
                             <td className="text-center">{item.qty}</td>
@@ -170,7 +170,7 @@ const InvoiceModal = ({
                           </tr>
                         ))}
                         {/* Empty rows to keep height fixed */}
-                        {Array.from({ length: Math.max(0, 10 - pageItems.length) }).map((_, i) => (
+                        {Array.from({ length: Math.max(0, 8 - pageItems.length) }).map((_, i) => (
                           <tr key={`empty-${i}`} >
                             <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
                             <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
@@ -229,9 +229,9 @@ const InvoiceModal = ({
                         <div className="w-2/5 border-l border-black/50 grid pt-2">
                           <span className="pl-0 flex justify-center">
                             <img
-                              src={`${process.env.PUBLIC_URL}/signature.png`}
+                              src={`${process.env.PUBLIC_URL}/signature.jpg`}
                               alt="Sameer"
-                              className="mx-auto w-18 h-9 m-2"
+                              className="mx-auto w-18 h-10 m-2"
                             />
                           </span>
                           <span className="text-[10px] pb-2 text-center">Authorised Signature</span>
