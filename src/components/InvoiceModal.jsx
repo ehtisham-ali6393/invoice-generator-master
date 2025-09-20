@@ -146,7 +146,7 @@ const InvoiceModal = ({
                   </div>
 
                   {/* ---------- Items Table ---------- */}
-                  <div className="pl-2 pr-2 pb-1 border border-black/50 border-b-0">
+                  <div className="pl-2 pr-2 pb-0 border border-black/50 border-b-0">
                     <table className="w-full text-left">
                       <thead>
                         <tr className="border-b border-black/50 text-[10px]">
@@ -171,7 +171,7 @@ const InvoiceModal = ({
                         ))}
                         {/* Empty rows to keep height fixed */}
                         {Array.from({ length: Math.max(0, 10 - pageItems.length) }).map((_, i) => (
-                          <tr key={`empty-${i}`} className="border-b border-black/50 h-[20px]">
+                          <tr key={`empty-${i}`} className="border-t border-black/50 h-[20px]">
                             <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
                             <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
                           </tr>
