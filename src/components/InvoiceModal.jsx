@@ -160,7 +160,7 @@ const InvoiceModal = ({
                       </thead>
                       <tbody className="text-[10px]">
                         {pageItems.map((item, index) => (
-                          <tr key={item.id} className="border-b border-black/50 h-[20px]">
+                          <tr key={item.id} >
                             <td className="text-center">{pageIndex * 10 + index + 1}</td>
                             <td>{item.name}</td>
                             <td className="text-center">9988</td>
@@ -171,7 +171,7 @@ const InvoiceModal = ({
                         ))}
                         {/* Empty rows to keep height fixed */}
                         {Array.from({ length: Math.max(0, 10 - pageItems.length) }).map((_, i) => (
-                          <tr key={`empty-${i}`} className="border-t border-black/50 h-[20px]">
+                          <tr key={`empty-${i}`} >
                             <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
                             <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
                           </tr>

@@ -30,19 +30,29 @@ const InvoiceForm = () => {
   const customers = [
     
     {
-      name: 'ABC Traders',
-      gst: '29ABCDE1234F1Z5',
-      address: '123, MG Road, Bangalore',
+      name: 'Kashmir Loom',
+      gst: '07AABCK4463H1ZK',
+      address: ' C - 65 Besment, Nizamuddin East, New Delhi - 110013',
     },
     {
-      name: 'XYZ Enterprises',
-      gst: '07XYZ9876Q1R2',
-      address: '45, Connaught Place, Delhi',
+      name: 'New Pinch',
+      gst: '07AALPK9019N1Z4',
+      address: ' C - 124, Dayanand Colony, Lajpat Nagar-IV, New Delhi - 110024',
     },
     {
-      name: 'Global Tech Pvt Ltd',
-      gst: '09GLB5678T1Z9',
-      address: '78, Park Street, Kolkata',
+      name: 'FIL Industies Private Limited',
+      gst: '07AAACF3272A1Z7',
+      address: ' Plot No.23, Near Pushpa Bhawan Local Shopping Centre, Madangir Opp Pushp Vihar, New Delhi - 110062',
+    },
+    {
+      name: 'Nidhi Creation',
+      gst: '07AHEPK5457C1ZI',
+      address: ' S-78 / First Floor, Okhla Industrial Area Phase - 2,  New Delhi - 110020',
+    },
+    {
+      name: ' Saltpetre Products & Services Pvt Ltd (OPC)',
+      gst: '29AAWCS4503M1ZL',
+      address: ' 524, 16th main, 3rd Block Koramangala, Bangalore - 560034',
     },
   ];
 
