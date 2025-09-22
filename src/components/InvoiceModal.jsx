@@ -52,7 +52,7 @@ const InvoiceModal = ({
     const pdf = new jsPDF({
       orientation: 'portrait',
       unit: 'in',
-      format: [5.5, 8],
+      format: [5.5, 8.5],
     });
 
     for (let pageIndex = 0; pageIndex < chunkedItems.length; pageIndex++) {
@@ -127,13 +127,13 @@ const InvoiceModal = ({
 
                   {/* Invoice meta */}
                   <div className="p-1 pl-2 pr-2 border border-black/50 border-b-0 text-[9px] flex justify-between">
-                    <div>
-                      <span className="font-bold">Invoice No. : {invoiceInfo.invoiceNumber} </span>
-                      <span></span>
+                    <div className='flex justify-between'>
+                      <span className="font-bold">Invoice No. : </span>
+                      <span className='pl-1'> {invoiceInfo.invoiceNumber} </span>
                     </div>
                     <div>
                       <span className="font-bold">Date : </span>
-                      <span>{invoiceInfo.today}</span>
+                      <span className='pl-1'>{invoiceInfo.today}</span>
                     </div>
                   </div>
                   <div className="p-2 grid grid-cols-2 border border-black/50 border-b-0 text-[8px]">
