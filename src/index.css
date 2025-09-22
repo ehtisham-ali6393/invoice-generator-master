@@ -40,3 +40,23 @@
     @apply font-Opensans;
   }
 }
+
+@media print {
+
+   body {
+    font-size: 9px !important;
+    line-height: 1.4 !important;
+  }
+
+  table {
+    table-layout: fixed;
+    width: 100% !important;
+  }
+  th, td {
+    word-wrap: break-word;
+    white-space: nowrap;
+  }
+}
+
+
+
