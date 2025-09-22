@@ -112,7 +112,7 @@ const InvoiceModal = ({
                     <img
                       src={`${process.env.PUBLIC_URL}/logo.png`}
                       alt="A R Creation"
-                      className="mx-auto w-30 h-16 pt-2"
+                      className="mx-auto w-32 h-12 pt-2"
                     />
                   </div>
                   <div className="p-2 pt-0 text-center border border-black/50 border-t-0 border-b-0 text-[8px]">
