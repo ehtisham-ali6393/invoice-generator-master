@@ -42,7 +42,7 @@ const InvoiceModal = ({
     onAddNextInvoice();
   };
 
-  // Split items into pages of 6
+  // Split items into pages of 12
   const chunkedItems = [];
   for (let i = 0; i < items.length; i += 12) {
     chunkedItems.push(items.slice(i, i + 12));
@@ -106,7 +106,7 @@ const InvoiceModal = ({
 
               {/* Loop through invoice pages */}
               {chunkedItems.map((pageItems, pageIndex) => (
-                <div key={pageIndex} className="p-10 page-break" id={`print-page-${pageIndex}`}>
+                <div key={pageIndex} className="p-4 page-break" id={`print-page-${pageIndex}`}>
                   {/* ---------- Header ---------- */}
                   <div className="text-center border border-black/50 border-b-0">
                     <img
