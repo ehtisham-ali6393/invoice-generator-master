@@ -52,7 +52,7 @@ const InvoiceModal = ({
     const pdf = new jsPDF({
       orientation: 'portrait',
       unit: 'in',
-      format: [6, 8],
+      format: [8.25, 11],
     });
 
     for (let pageIndex = 0; pageIndex < chunkedItems.length; pageIndex++) {
@@ -146,16 +146,16 @@ const InvoiceModal = ({
                   </div>
 
                   {/* ---------- Items Table ---------- */}
-                  <div className="pl-2 pr-2 pb-0 border border-black/50 border-b-0">
+                  <div className="pl-2 pr-2 pb-1 border border-black/50 border-b-0">
                     <table className="w-full text-left">
                       <thead>
-                        <tr className="border-b border-black/50 text-[8px]">
-                          <th>No.</th>
-                          <th>ITEM</th>
-                          <th className="text-center">HSN</th>
-                          <th className="text-center">QTY</th>
-                          <th className="text-center">RATE</th>
-                          <th className="text-center">AMOUNT</th>
+                        <tr className="border-b border-black/50 text-[8px] ">
+                          <th className='pt-1 pb-1'>No.</th>
+                          <th className='pt-1 pb-1'>ITEM</th>
+                          <th className="text-center pt-1 pb-1">HSN</th>
+                          <th className="text-center pt-1 pb-1">QTY</th>
+                          <th className="text-center pt-1 pb-1">RATE</th>
+                          <th className="text-center pt-1 pb-1">AMOUNT</th>
                         </tr>
                       </thead>
                       <tbody className="text-[8px]">
@@ -186,9 +186,9 @@ const InvoiceModal = ({
 
                   {/* ---------- Totals Section (only on last page) ---------- */}
                   {pageIndex === chunkedItems.length - 1 && (
-                    <div className="flex flex-row border border-black/50 pl-2 pr-2 pb-2 text-[8px] ">
+                    <div className="flex flex-row border border-black/50 pl-2 pr-2 text-[8px] ">
                       <div className="w-1/2 ">
-                        <div className="flex w-full pt-2">
+                        <div className="flex w-full pt-1">
                           <span className="font-bold">Subtotal :</span>
                           <span className="ml-2">₹ {invoiceInfo.subtotal.toFixed(2)}</span>
                         </div>
@@ -200,12 +200,12 @@ const InvoiceModal = ({
                           <span className="font-bold">SGST :</span>
                           <span className="ml-2">₹ {invoiceInfo.sgstRate.toFixed(2)}</span>
                         </div>
-                        <div className="flex w-full">
+                        <div className="flex w-full pb-1">
                           <span className="font-bold">IGST :</span>
                           <span className="ml-2">₹ {invoiceInfo.igstRate.toFixed(2)}</span>
                         </div>
                       </div>
-                      <div className="w-1/2 pl-2 pt-2 border-l border-black/50">
+                      <div className="w-1/2 pl-2 pt-1 border-l border-black/50">
                         <div>
                           <span className="font-bold">Total :</span>
                           <span className="font-bold ml-1">
@@ -224,21 +224,21 @@ const InvoiceModal = ({
                   {pageIndex === chunkedItems.length - 1 && (
                     <>
                       <div className="flex flex-row border border-black/50 border-t-0 pb-0 text-center">
-                        <div className="w-3/5 grid font-bold p-2 text-[8px]">
-                          <span>Bank Details :</span>
+                        <div className="w-3/5 grid font-bold p-0 text-[8px]">
+                          <span className='pt-1 '>Bank Details :</span>
                           <span>Bandhan Bank</span>
                           <span>A/C No. : 10170000343326</span>
-                          <span>IFSC CODE : BDBL0001215</span>
+                          <span className='pb-1'>IFSC CODE : BDBL0001215</span>
                         </div>
                         <div className="w-2/5 border-l border-black/50 grid pt-0">
                           <span className="pl-0 flex justify-center">
                             <img
                               src={`${process.env.PUBLIC_URL}/signature.png`}
                               alt="Sameer"
-                              className="mx-auto w-18 pt-0 h-10 m-2"
+                              className="mx-auto w-18 pt-0 h-9 m-0"
                             />
                           </span>
-                          <span className="text-[8px] pb-0 text-center">Authorised Signature</span>
+                          <span className="text-[8px] pb-1 text-center">Authorised Signature</span>
                         </div>
                       </div>
 
