@@ -42,10 +42,10 @@ const InvoiceModal = ({
     onAddNextInvoice();
   };
 
-  // Split items into pages of 8
+  // Split items into pages of 6
   const chunkedItems = [];
-  for (let i = 0; i < items.length; i += 8) {
-    chunkedItems.push(items.slice(i, i + 8));
+  for (let i = 0; i < items.length; i += 6) {
+    chunkedItems.push(items.slice(i, i + 6));
   }
 
   const SaveAsPDFHandler = async () => {
@@ -106,16 +106,16 @@ const InvoiceModal = ({
 
               {/* Loop through invoice pages */}
               {chunkedItems.map((pageItems, pageIndex) => (
-                <div key={pageIndex} className="p-4 page-break" id={`print-page-${pageIndex}`}>
+                <div key={pageIndex} className="p-8 page-break" id={`print-page-${pageIndex}`}>
                   {/* ---------- Header ---------- */}
                   <div className="text-center border border-black/50 border-b-0">
                     <img
                       src={`${process.env.PUBLIC_URL}/logo.png`}
                       alt="A R Creation"
-                      className="mx-auto w-30 h-16 pt-3"
+                      className="mx-auto w-30 h-16 pt-2"
                     />
                   </div>
-                  <div className="p-2 pt-0 text-center border border-black/50 border-t-0 border-b-0 text-[10px]">
+                  <div className="p-2 pt-0 text-center border border-black/50 border-t-0 border-b-0 text-[8px]">
                     <span>RZ - 412A, Gali no. 13, Tughlakabad Extension, New Delhi. 110019</span><br />
                     <span>Email : ownerarcreation@gmail.com</span><br />
                     <span>Mobile : 9643251284, 9667038099</span>
@@ -126,7 +126,7 @@ const InvoiceModal = ({
                   </div>
 
                   {/* Invoice meta */}
-                  <div className="p-1 pl-2 pr-2 border border-black/50 border-b-0 text-[10px] flex justify-between">
+                  <div className="p-1 pl-2 pr-2 border border-black/50 border-b-0 text-[9px] flex justify-between">
                     <div>
                       <span className="font-bold">Invoice No. : </span>
                       <span>{invoiceInfo.invoiceNumber}</span>
@@ -136,7 +136,7 @@ const InvoiceModal = ({
                       <span>{invoiceInfo.today}</span>
                     </div>
                   </div>
-                  <div className="p-2 grid grid-cols-2 border border-black/50 border-b-0 text-[10px]">
+                  <div className="p-2 grid grid-cols-2 border border-black/50 border-b-0 text-[8px]">
                     <span className="font-bold ">Party's Name :</span>
                     <span>{invoiceInfo.customerName}</span>
                     <span className="font-bold">Billing Address :</span>
@@ -149,7 +149,7 @@ const InvoiceModal = ({
                   <div className="pl-2 pr-2 pb-0 border border-black/50 border-b-0">
                     <table className="w-full text-left">
                       <thead>
-                        <tr className="border-b border-black/50 text-[10px]">
+                        <tr className="border-b border-black/50 text-[8px]">
                           <th>No.</th>
                           <th>ITEM</th>
                           <th className="text-center">HSN</th>
@@ -158,19 +158,19 @@ const InvoiceModal = ({
                           <th className="text-center">AMOUNT</th>
                         </tr>
                       </thead>
-                      <tbody className="text-[10px]">
+                      <tbody className="text-[8px]">
                         {pageItems.map((item, index) => (
                           <tr key={item.id} >
-                            <td className="text-left pl-2">{pageIndex * 8 + index + 1}</td>
-                            <td>{item.name}</td>
-                            <td className="text-center">9988</td>
-                            <td className="text-center">{item.qty}</td>
-                            <td className="text-center">₹ {Number(item.price).toFixed(2)}</td>
-                            <td className="text-center">₹ {Number(item.price * item.qty).toFixed(2)}</td>
+                            <td className="text-left pl-2 pt-0.5 pb-0">{pageIndex * 6 + index + 1}</td>
+                            <td className='pt-0 pb-0'>{item.name}</td>
+                            <td className="text-center pt-0 pb-0">9988</td>
+                            <td className="text-center pt-0 pb-0">{item.qty}</td>
+                            <td className="text-center pt-0 pb-0">₹ {Number(item.price).toFixed(2)}</td>
+                            <td className="text-center pt-0 pb-0">₹ {Number(item.price * item.qty).toFixed(2)}</td>
                           </tr>
                         ))}
                         {/* Empty rows to keep height fixed */}
-                        {Array.from({ length: Math.max(0, 8 - pageItems.length) }).map((_, i) => (
+                        {Array.from({ length: Math.max(0, 6 - pageItems.length) }).map((_, i) => (
                           <tr key={`empty-${i}`} >
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
@@ -186,7 +186,7 @@ const InvoiceModal = ({
 
                   {/* ---------- Totals Section (only on last page) ---------- */}
                   {pageIndex === chunkedItems.length - 1 && (
-                    <div className="flex flex-row border border-black/50 pl-2 pr-2 pb-2 text-[10px] ">
+                    <div className="flex flex-row border border-black/50 pl-2 pr-2 pb-2 text-[8px] ">
                       <div className="w-1/2 ">
                         <div className="flex w-full pt-2">
                           <span className="font-bold">Subtotal :</span>
@@ -214,7 +214,7 @@ const InvoiceModal = ({
                         </div>
                         <div>
                           <span className="font-bold">In words :</span>
-                          <span className="ml-2 text-[10px]">{numberToWords(Math.floor(invoiceInfo.total))}</span>
+                          <span className="ml-2 text-[8px]">{numberToWords(Math.floor(invoiceInfo.total))}</span>
                         </div>
                       </div>
                     </div>
@@ -223,31 +223,31 @@ const InvoiceModal = ({
                   {/* ---------- Footer (only last page) ---------- */}
                   {pageIndex === chunkedItems.length - 1 && (
                     <>
-                      <div className="flex flex-row border border-black/50 border-t-0 text-center">
-                        <div className="w-3/5 grid font-bold p-2 text-[10px]">
+                      <div className="flex flex-row border border-black/50 border-t-0 pb-0 text-center">
+                        <div className="w-3/5 grid font-bold p-2 text-[8px]">
                           <span>Bank Details :</span>
                           <span>Bandhan Bank</span>
                           <span>A/C No. : 10170000343326</span>
                           <span>IFSC CODE : BDBL0001215</span>
                         </div>
-                        <div className="w-2/5 border-l border-black/50 grid pt-2">
+                        <div className="w-2/5 border-l border-black/50 grid pt-0">
                           <span className="pl-0 flex justify-center">
                             <img
-                              src={`${process.env.PUBLIC_URL}/signature.jpg`}
+                              src={`${process.env.PUBLIC_URL}/signature.png`}
                               alt="Sameer"
-                              className="mx-auto w-18 h-10 m-2"
+                              className="mx-auto w-18 pt-0 h-10 m-2"
                             />
                           </span>
-                          <span className="text-[9px] pb-2 text-center">Authorised Signature</span>
+                          <span className="text-[8px] pb-0 text-center">Authorised Signature</span>
                         </div>
                       </div>
 
-                      <div className="p-1 pl-2 pr-2 border border-black/50 border-t-0 text-[10px]">
+                      <div className="p-1 pl-2 pr-2 border border-black/50 border-t-0 text-[8px]">
                         <span className="font-bold">Special Note : </span>
                         <span>{invoiceInfo.splNote}</span>
                       </div>
 
-                      <div className="p-1 pl-2 pr-2 border border-black/50 border-t-0 text-[10px]">
+                      <div className="p-1 pl-2 pr-2 border border-black/50 border-t-0 text-[6px]">
                         <span className="font-bold">Terms & Conditions : </span>
                         <span>All disputes are Subject to Delhi Jurisdiction. Goods once sold will not be taken back. Interest will be charged @ 18%, if bill not paid within 15 days. Our responsibility ceases on Delivery of the carrier.</span>
                       </div>
