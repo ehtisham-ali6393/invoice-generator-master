@@ -132,7 +132,7 @@ const InvoiceModal = ({
                       <span className='pl-1'> {invoiceInfo.invoiceNumber} </span>
                     </div>
                     <div className='flex justify-center'>
-                      <span className="font-bold">State : </span>
+                      <span className="font-bold">State</span>
                       <span className='pl-1'> Delhi </span>
                     </div>
 
