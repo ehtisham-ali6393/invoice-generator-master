@@ -52,7 +52,7 @@ const InvoiceModal = ({
     const pdf = new jsPDF({
       orientation: 'portrait',
       unit: 'in',
-      format: [5.5, 8.5],
+      format: [6, 8],
     });
 
     for (let pageIndex = 0; pageIndex < chunkedItems.length; pageIndex++) {
