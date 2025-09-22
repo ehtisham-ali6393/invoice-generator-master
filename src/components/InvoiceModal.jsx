@@ -44,15 +44,15 @@ const InvoiceModal = ({
 
   // Split items into pages of 6
   const chunkedItems = [];
-  for (let i = 0; i < items.length; i += 6) {
-    chunkedItems.push(items.slice(i, i + 6));
+  for (let i = 0; i < items.length; i += 12) {
+    chunkedItems.push(items.slice(i, i + 12));
   }
 
   const SaveAsPDFHandler = async () => {
     const pdf = new jsPDF({
       orientation: 'portrait',
       unit: 'in',
-      format: [5.5, 8.5],
+      format: [5.5, 8],
     });
 
     for (let pageIndex = 0; pageIndex < chunkedItems.length; pageIndex++) {
@@ -106,7 +106,7 @@ const InvoiceModal = ({
 
               {/* Loop through invoice pages */}
               {chunkedItems.map((pageItems, pageIndex) => (
-                <div key={pageIndex} className="p-8 page-break" id={`print-page-${pageIndex}`}>
+                <div key={pageIndex} className="p-10 page-break" id={`print-page-${pageIndex}`}>
                   {/* ---------- Header ---------- */}
                   <div className="text-center border border-black/50 border-b-0">
                     <img
@@ -161,7 +161,7 @@ const InvoiceModal = ({
                       <tbody className="text-[8px]">
                         {pageItems.map((item, index) => (
                           <tr key={item.id} >
-                            <td className="text-left pl-2 pt-0.5 pb-0">{pageIndex * 6 + index + 1}</td>
+                            <td className="text-left pl-2 pt-0.5 pb-0">{pageIndex * 12 + index + 1}</td>
                             <td className='pt-0 pb-0'>{item.name}</td>
                             <td className="text-center pt-0 pb-0">9988</td>
                             <td className="text-center pt-0 pb-0">{item.qty}</td>
@@ -170,7 +170,7 @@ const InvoiceModal = ({
                           </tr>
                         ))}
                         {/* Empty rows to keep height fixed */}
-                        {Array.from({ length: Math.max(0, 6 - pageItems.length) }).map((_, i) => (
+                        {Array.from({ length: Math.max(0, 12 - pageItems.length) }).map((_, i) => (
                           <tr key={`empty-${i}`} >
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
