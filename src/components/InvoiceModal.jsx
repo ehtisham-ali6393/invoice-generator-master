@@ -128,8 +128,8 @@ const InvoiceModal = ({
                   {/* Invoice meta */}
                   <div className="p-1 pl-2 pr-2 border border-black/50 border-b-0 text-[9px] flex justify-between">
                     <div>
-                      <span className="font-bold">Invoice No. : </span>
-                      <span>{invoiceInfo.invoiceNumber}</span>
+                      <span className="font-bold">Invoice No. : {invoiceInfo.invoiceNumber} </span>
+                      <span></span>
                     </div>
                     <div>
                       <span className="font-bold">Date : </span>
