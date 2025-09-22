@@ -128,7 +128,7 @@ const InvoiceModal = ({
                   {/* Invoice meta */}
                   <div className="p-1 pl-2 pr-2 border border-black/50 border-b-0 text-[9px] flex justify-between">
                     <div className='flex justify-between'>
-                      <span className="font-bold">Invoice No. : </span>
+                      <span className="font-bold">Invoice No : </span>
                       <span className='pl-1'> {invoiceInfo.invoiceNumber} </span>
                     </div>
                     <div>
