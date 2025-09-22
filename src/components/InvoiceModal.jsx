@@ -208,13 +208,13 @@ const InvoiceModal = ({
                       <div className="w-1/2 pl-2 pt-2 border-l border-black/50">
                         <div>
                           <span className="font-bold">Total :</span>
-                          <span className="font-bold ml-2">
+                          <span className="font-bold ml-1">
                             ₹ {invoiceInfo.total % 1 === 0 ? invoiceInfo.total : invoiceInfo.total.toFixed(2)}
                           </span>
                         </div>
                         <div>
                           <span className="font-bold">In words :</span>
-                          <span className="ml-2 text-[8px]">{numberToWords(Math.floor(invoiceInfo.total))}</span>
+                          <span className="ml-1 text-[8px]">{numberToWords(Math.floor(invoiceInfo.total))}</span>
                         </div>
                       </div>
                     </div>
