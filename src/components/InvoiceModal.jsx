@@ -30,6 +30,9 @@ const InvoiceModal = ({
   isOpen,
   setIsOpen,
   invoiceInfo,
+  cgst,
+  sgst,
+  igst,
   items,
   onAddNextInvoice,
 }) => {
@@ -192,22 +195,22 @@ const InvoiceModal = ({
                   {/* ---------- Totals Section (only on last page) ---------- */}
                   {pageIndex === chunkedItems.length - 1 && (
                     <div className="flex flex-row border border-black/50 pl-2 pr-2 text-[8px] ">
-                      <div className="w-1/2 ">
-                        <div className="flex w-full pt-1">
+                      <div className="w-1/2  ">
+                        <div className="flex w-full justify-between pr-2 pt-1">
                           <span className="font-bold">Subtotal :</span>
                           <span className="ml-2">₹ {invoiceInfo.subtotal.toFixed(2)}</span>
                         </div>
-                        <div className="flex w-full">
+                        <div className="flex w-full justify-between pr-2">
                           <span className="font-bold">CGST :</span>
-                          <span className="ml-2">₹ {invoiceInfo.cgstRate.toFixed(2)}</span>
+                          <span className="ml-2">({invoiceInfo.cgst} %) ₹ {invoiceInfo.cgstRate.toFixed(2)}</span>
                         </div>
-                        <div className="flex w-full">
+                        <div className="flex w-full justify-between pr-2">
                           <span className="font-bold">SGST :</span>
-                          <span className="ml-2">₹ {invoiceInfo.sgstRate.toFixed(2)}</span>
+                          <span className="ml-2"> ({invoiceInfo.sgst} %) ₹ {invoiceInfo.sgstRate.toFixed(2)}</span>
                         </div>
-                        <div className="flex w-full pb-1">
+                        <div className="flex w-full justify-between pr-2 pb-1">
                           <span className="font-bold">IGST :</span>
-                          <span className="ml-2">₹ {invoiceInfo.igstRate.toFixed(2)}</span>
+                          <span className="ml-2">({invoiceInfo.igst || '0.0'} %) ₹ {invoiceInfo.igstRate.toFixed(2)}</span>
                         </div>
                       </div>
                       <div className="w-1/2 pl-2 pt-1 border-l border-black/50">

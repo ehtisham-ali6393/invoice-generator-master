@@ -346,6 +346,9 @@ const InvoiceForm = () => {
               cgstRate,
               igstRate,
               splNote,
+              cgst,
+              sgst,
+              igst,
               total,
             }}
             items={items}
