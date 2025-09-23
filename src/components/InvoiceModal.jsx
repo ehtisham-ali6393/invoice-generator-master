@@ -30,9 +30,6 @@ const InvoiceModal = ({
   isOpen,
   setIsOpen,
   invoiceInfo,
-  cgst,
-  sgst,
-  igst,
   items,
   onAddNextInvoice,
 }) => {
@@ -198,19 +195,19 @@ const InvoiceModal = ({
                       <div className="w-1/2  ">
                         <div className="flex w-full justify-between pr-2 pt-1">
                           <span className="font-bold">Subtotal :</span>
-                          <span className="ml-2">₹ {invoiceInfo.subtotal.toFixed(2)}</span>
+                          <span className="ml-2">₹ <strong>{invoiceInfo.subtotal.toFixed(2)}</strong></span>
                         </div>
                         <div className="flex w-full justify-between pr-2">
                           <span className="font-bold">CGST :</span>
-                          <span className="ml-2">({invoiceInfo.cgst} %) ₹ {invoiceInfo.cgstRate.toFixed(2)}</span>
+                          <span className="ml-2">({invoiceInfo.cgst} %) ₹ <strong>{invoiceInfo.cgstRate.toFixed(2)}</strong></span>
                         </div>
                         <div className="flex w-full justify-between pr-2">
                           <span className="font-bold">SGST :</span>
-                          <span className="ml-2"> ({invoiceInfo.sgst} %) ₹ {invoiceInfo.sgstRate.toFixed(2)}</span>
+                          <span className="ml-2"> ({invoiceInfo.sgst} %) ₹ <strong>{invoiceInfo.sgstRate.toFixed(2)}</strong></span>
                         </div>
                         <div className="flex w-full justify-between pr-2 pb-1">
                           <span className="font-bold">IGST :</span>
-                          <span className="ml-2">({invoiceInfo.igst || '0.0'} %) ₹ {invoiceInfo.igstRate.toFixed(2)}</span>
+                          <span className="ml-2">({invoiceInfo.igst || '0.0'} %) ₹ <strong>{invoiceInfo.igstRate.toFixed(2)}</strong></span>
                         </div>
                       </div>
                       <div className="w-1/2 pl-2 pt-1 border-l border-black/50">
