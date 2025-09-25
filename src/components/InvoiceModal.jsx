@@ -42,10 +42,10 @@ const InvoiceModal = ({
     onAddNextInvoice();
   };
 
-  // Split items into pages of 12
+  // Split items into pages of 10
   const chunkedItems = [];
-  for (let i = 0; i < items.length; i += 12) {
-    chunkedItems.push(items.slice(i, i + 12));
+  for (let i = 0; i < items.length; i += 10) {
+    chunkedItems.push(items.slice(i, i + 10));
   }
 
   const SaveAsPDFHandler = async () => {
@@ -112,7 +112,7 @@ const InvoiceModal = ({
                     <img
                       src={`${process.env.PUBLIC_URL}/logo.png`}
                       alt="A R Creation"
-                      className="mx-auto w-34 h-14 pt-2"
+                      className="mx-auto w-34 h-16 pt-2"
                     />
                   </div>
                   <div className="p-2 pt-0 text-center border border-black/50 border-t-0 border-b-0 text-[8px]">
@@ -166,7 +166,7 @@ const InvoiceModal = ({
                       <tbody className="text-[8px]">
                         {pageItems.map((item, index) => (
                           <tr key={item.id} >
-                            <td className="text-left pl-2 pt-0.5 pb-0">{pageIndex * 12 + index + 1}</td>
+                            <td className="text-left pl-2 pt-0.5 pb-0">{pageIndex * 10 + index + 1}</td>
                             <td className='pt-0 pb-0'>{item.name}</td>
                             <td className="text-center pt-0 pb-0">9988</td>
                             <td className="text-center pt-0 pb-0">{item.qty}</td>
@@ -175,7 +175,7 @@ const InvoiceModal = ({
                           </tr>
                         ))}
                         {/* Empty rows to keep height fixed */}
-                        {Array.from({ length: Math.max(0, 12 - pageItems.length) }).map((_, i) => (
+                        {Array.from({ length: Math.max(0, 10 - pageItems.length) }).map((_, i) => (
                           <tr key={`empty-${i}`} >
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
@@ -238,7 +238,7 @@ const InvoiceModal = ({
                         <div className="w-2/5 border-l border-black/50 grid pt-0">
                           <span className="pl-0 flex justify-center">
                             <img
-                              src={`${process.env.PUBLIC_URL}/signature.png`}
+                              src={`${process.env.PUBLIC_URL}/sign.png`}
                               alt="Sameer"
                               className="mx-auto w-18 pt-0 h-9 m-0"
                             />
