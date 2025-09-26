@@ -159,6 +159,7 @@ const InvoiceForm = () => {
               type="number"
               name="invoiceNumber"
               id="invoiceNumber"
+              placeholder='Enter Invoice No.'
               min="1"
               step="1"
               value={invoiceNumber}
