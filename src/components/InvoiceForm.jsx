@@ -17,7 +17,7 @@ const InvoiceForm = () => {
   const [cgst, setCgst] = useState('2.5');
   const [sgst, setSgst] = useState('2.5');
   const [igst, setIgst] = useState('');
-  const [invoiceNumber, setInvoiceNumber] = useState(1);
+  const [invoiceNumber, setInvoiceNumber] = useState('Enter Invoice No.');
   const [ownerGstNumber] = useState('07AHJPA8136D1ZN');
 
   // Customer info
@@ -160,8 +160,6 @@ const InvoiceForm = () => {
               name="invoiceNumber"
               id="invoiceNumber"
               placeholder='Enter Invoice No.'
-              min="1"
-              step="1"
               value={invoiceNumber}
               onChange={(event) => setInvoiceNumber(event.target.value)}
             />
