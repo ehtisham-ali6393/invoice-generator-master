@@ -18,7 +18,7 @@ const InvoiceForm = () => {
   const [sgst, setSgst] = useState('2.5');
   const [igst, setIgst] = useState('');
   const [invoiceNumber, setInvoiceNumber] = useState('Enter Invoice No.');
-  const [ownerGstNumber] = useState('07AHJPA8136D1ZN');
+  const [ownerGstNumber] = useState('09ABCDE1234F1Z5');
 
   // Customer info
   const [customerGstNumber, setCustomerGstNumber] = useState('');
@@ -27,34 +27,59 @@ const InvoiceForm = () => {
   const [customerBillingAddress, setCustomerBillingAddress] = useState('');
 
   // Pre-stored customers
-  const customers = [
-    
-    {
-      name: 'Kashmir Loom',
-      gst: '07AABCK4463H1ZK',
-      address: 'C - 65 Besment, Nizamuddin East, New Delhi - 110013',
-    },
-    {
-      name: 'New Pinch',
-      gst: '07AALPK9019N1Z4',
-      address: 'C - 124, Dayanand Colony, Lajpat Nagar-IV, New Delhi - 110024',
-    },
-    {
-      name: 'FIL Industies Private Limited',
-      gst: '07AAACF3272A1Z7',
-      address: ' Plot No.23, Near Pushpa Bhawan Local Shopping Centre, Madangir Opp Pushp Vihar, New Delhi - 110062',
-    },
-    {
-      name: 'Nidhi Creation',
-      gst: '07AHEPK5457C1ZI',
-      address: ' S-78 / First Floor, Okhla Industrial Area Phase - 2,  New Delhi - 110020',
-    },
-    {
-      name: 'Saltpetre Products & Services Pvt Ltd (OPC)',
-      gst: '29AAWCS4503M1ZL',
-      address: '524, 16th main, 3rd Block Koramangala, Bangalore - 560034',
-    },
-  ];
+ const customers = [
+  {
+    name: 'Tech Innovators Pvt Ltd',
+    gst: '09ABCDE1234F1Z5',
+    address: '123, Tech Park Road, Gomti Nagar, Lucknow, Uttar Pradesh - 226010',
+  },
+  {
+    name: 'Future Retailers',
+    gst: '27PQRSX5678L1A2',
+    address: '45, MG Road, Andheri East, Mumbai, Maharashtra - 400069',
+  },
+  {
+    name: 'Green Valley Exports',
+    gst: '33LMNOP4321K1B7',
+    address: '78, Mount Road, T. Nagar, Chennai, Tamil Nadu - 600017',
+  },
+  {
+    name: 'Digital Solutions Hub',
+    gst: '06UVWXY9876M1C3',
+    address: 'Plot 56, Sector 44, Gurugram, Haryana - 122002',
+  },
+  {
+    name: 'Skyline Enterprises',
+    gst: '29QRSTU6543P1D9',
+    address: '89, Koramangala 4th Block, Bangalore, Karnataka - 560034',
+  },
+  {
+    name: 'Urban Crafts Ltd',
+    gst: '19CDEFG8765H1Z2',
+    address: '12, Park Street, Kolkata, West Bengal - 700016',
+  },
+  {
+    name: 'North Star Traders',
+    gst: '04HIJKL3456N1X8',
+    address: '22, Sector 17, Chandigarh - 160017',
+  },
+  {
+    name: 'Bright Future Textiles',
+    gst: '08MNOPQ1234R1Y6',
+    address: 'Industrial Area, Sitapura, Jaipur, Rajasthan - 302022',
+  },
+  {
+    name: 'Oceanic Foods Pvt Ltd',
+    gst: '24RSTUV7890W1Z3',
+    address: 'Plot 12, GIDC Estate, Jamnagar, Gujarat - 361004',
+  },
+  {
+    name: 'Evergreen Electronics',
+    gst: '32WXYZA2345B1C7',
+    address: '21, Palayam, Thiruvananthapuram, Kerala - 695034',
+  },
+];
+
 
   const [items, setItems] = useState([
     {

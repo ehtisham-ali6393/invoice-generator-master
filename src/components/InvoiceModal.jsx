@@ -111,14 +111,14 @@ const InvoiceModal = ({
                   <div className="text-center border border-black/50 border-b-0">
                     <img
                       src={`${process.env.PUBLIC_URL}/logo.png`}
-                      alt="A R Creation"
+                      alt="Ehtisham Ali"
                       className="mx-auto w-34 h-16 pt-2"
                     />
                   </div>
                   <div className="p-2 pt-0 text-center border border-black/50 border-t-0 border-b-0 text-[8px]">
-                    <span>RZ - 412A, Gali no. 13, Tughlakabad Extension, New Delhi. 110019</span><br />
-                    <span>Email : ownerarcreation@gmail.com</span><br />
-                    <span>Mobile : 9643251284, 9667038099</span>
+                    <span>123, Tech Park Road, New Delhi. 110019</span><br />
+                    <span>Email : demo@gmail.com</span><br />
+                    <span>Mobile : 9876543210</span>
                     <div>
                       <span className="font-bold">GSTIN : </span>
                       <span className="font-bold">{invoiceInfo.ownerGstNumber}</span>
@@ -231,9 +231,9 @@ const InvoiceModal = ({
                       <div className="flex flex-row border border-black/50 border-t-0 pb-0 text-center">
                         <div className="w-3/5 grid font-bold p-0 text-[8px]">
                           <span className='pt-1 '>Bank Details :</span>
-                          <span>Bandhan Bank</span>
-                          <span>A/C No. : 10170000343326</span>
-                          <span className='pb-1'>IFSC CODE : BDBL0001215</span>
+                          <span>State Bank of India</span>
+                          <span>A/C No. : **************</span>
+                          <span className='pb-1'>IFSC CODE : ***********</span>
                         </div>
                         <div className="w-2/5 border-l border-black/50 grid pt-0">
                           <span className="pl-0 flex justify-center">
@@ -243,7 +243,7 @@ const InvoiceModal = ({
                               className="mx-auto w-18 pt-0 h-9 m-0"
                             />
                           </span>
-                          <span className="text-[8px] pb-1 text-center">Authorised Signature</span>
+                          <span className="text-[8px] font-bold pb-0 text-center">Authorised Signature</span>
                         </div>
                       </div>
 
